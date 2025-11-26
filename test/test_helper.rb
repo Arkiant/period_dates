@@ -1,17 +1,16 @@
-# Configure Rails Environment
-ENV["RAILS_ENV"] = "test"
+# frozen_string_literal: true
 
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
-require "rails/test_help"
+require 'bundler/setup'
+require 'date'
+require 'active_support/core_ext/date'
+require 'active_support/core_ext/date_time'
+require 'active_support/test_case'
+require 'active_support/testing/assertions'
+require 'minitest/autorun'
+require 'period_dates'
 
-require "semester"
-
-Rails.backtrace_cleaner.remove_silencers!
-
-# Load support files
-Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
-
-# Load fixtures from the engine
-if ActiveSupport::TestCase.method_defined?(:fixture_path=)
-  ActiveSupport::TestCase.fixture_path = File.expand_path("../fixtures", __FILE__)
+# Extender Minitest::Test con ActiveSupport::TestCase
+class ActiveSupport::TestCase
+  include ActiveSupport::Testing::Assertions
 end
+
